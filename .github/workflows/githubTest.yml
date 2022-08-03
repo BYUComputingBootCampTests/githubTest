@@ -1,4 +1,4 @@
-name: Git Test
+name: GitHub Test
 
 on: 
   repository_dispatch:
@@ -30,12 +30,6 @@ jobs:
       run: |
         git config --global user.email "byucomputingbootcamptests@gmail.com"
         git config --global user.name "BYU Computing Bootcamp Tests"
-    
-    - name: Setup SSH in case SSH is used
-      uses: MrSquaare/ssh-setup-action@v1
-      with:
-        host: github.com
-        private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       #Get Repository that isn't currently being checked
     - name: Get a Pull Request's Repo Name that isn't already being checked
@@ -82,7 +76,7 @@ jobs:
       uses: therussiankid92/gat@v1.5
       with:
         assertion: should.equal
-        actual: ${{ steps.output.outputs.content }}
+        actual: ${{ steps.readStepFile.outputs.content }}
         expected: ${{ secrets.LAST_STEP }}
 
     - name: Comment
